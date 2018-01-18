@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+
+import subprocess
+
+foo = subprocess.check_output(["playerctl", "metadata"]).decode().split(',')
+name = foo[5][foo[5].find('[') + 2:foo[5].rfind(']') - 1]
+title = foo[8][foo[8].find('<') + 2:foo[8].rfind('>') - 1]
+print(name, "-", title)
