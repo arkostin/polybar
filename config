@@ -42,14 +42,14 @@ padding-right = 2
 module-margin-left = 0
 module-margin-right = 2
 
-font-0 = FontAwesome:pixelsize=15;3
+font-0 = FontAwesome:pixelsize=15;2.5
 font-1 = FontAwesome:pixelsize=10;3
 font-2 = RobotoMono-Medium:pixelsize=12;1
 font-3 = SanFranciscoText:size=14;2
 
-modules-left = battery temperature memory cpu wlan
+modules-left = battery temperature memory cpu 
 modules-center = i3
-modules-right = spotify weather date
+modules-right = spotify wlan weather date
 
 tray-position = right
 tray-padding = 2
@@ -107,6 +107,20 @@ menu-2-0 = Gimp
 menu-2-0-exec = gimp &
 menu-2-1 = Scrot
 menu-2-1-exec = scrot &
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <label>
+label =  %percentage%%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
 
 [module/xwindow]
 type = internal/xwindow
@@ -229,6 +243,8 @@ type = internal/xbacklight
 
 format = <label> <bar>
 
+label = %percentage%
+
 bar-width = 10
 bar-indicator = |
 bar-indicator-foreground = #ff
@@ -268,9 +284,9 @@ interval = 3.0
 
 format-connected = <label-connected>
 format-connected-underline = 
-label-connected = " %downspeed%"
+label-connected = "  %essid%"
 label-connected-foreground = #fdfdfdf
-label-disconnected = N/A
+label-disconnected = " ---"
 
 
 format-disconnected = <label-disconnected>
@@ -365,14 +381,15 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp2_input
 format = <ramp> <label>
 format-underline = 
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
 label = " %temperature%"
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+label-warn = " %temperature%!"
+;label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
 ramp-1 = 
